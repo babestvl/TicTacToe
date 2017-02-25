@@ -2,27 +2,32 @@ import java.util.Scanner;
 
 public class Game {
     private Scanner scanner = new Scanner(System.in);
-
     private boolean check(Board board, int row, int column) {
-        int count = 0;
-        Square[][] s = board.getSquares();
         for (int i = 0; i < row; i++) {
-            rowCheck(s[i]);
+            String s = "";
+            for (int j = 0; j < column; j++) {
+                s+=board.getSquares()[i][j];
+            }
+            if (s.contains("XXXXX")||s.contains("OOOOO")) {
+                return true;
+            }
+        }
+        for (int i = 0; i < column; i++) {
+            String s = "";
+            for (int j = 0; j < row; j++) {
+                s += board.getSquares()[j][i];
+            }
+            if (s.contains("XXXXX")||s.contains("OOOOO")) {
+                return true;
+            }
         }
         for (int i = 0; i < row; i++) {
-            Square[] sq = new Square[column];
-            for (int j = 0; j < column; j++) {
-                sq[j] = s[i][j];
+            String s = "";
+            for (int j = 0; j < row; i++) {
+
             }
-            columnCheck(sq);
         }
         return false;
-    }
-    private boolean rowCheck(Square[] row) {
-        
-    }
-    private boolean columnCheck(Square[] col) {
-
     }
 
     public void start() {
@@ -33,37 +38,21 @@ public class Game {
         Player p1 = new Player(scanner.nextLine(), "X");
         System.out.print("Second player name: ");
         Player p2 = new Player(scanner.nextLine(), "O");
-        while(true) {
-            System.out.println("P1's turn.");
+        Player[] p = {p1,p2};
+
+        for (int i = 0; true; i++){
+            System.out.println(p[i%2].getName()+"'s turn.");
             System.out.print("Please select row: ");
             row = scanner.nextInt();
             System.out.print("Please select column: ");
             column = scanner.nextInt();
-
-            p1.placeSymbol(board, row, column);
-
-            System.out.printf("You placed %s on (%d,%d)\n","X",row,column);
+            p[i%2].placeSymbol(board, row, column);
+            System.out.printf("You placed %s on (%d,%d)\n",p[i%2].getSymValue(), row, column);
             board.print();
             if (check(board, row, column)) {
-                System.out.printf("%s player win!\n",p1.getName());
+                System.out.printf("%s player win!\n",p[i%2].getName());
                 break;
             }
-
-            System.out.println("P2's turn.");
-            System.out.print("Please select row: ");
-            row = scanner.nextInt();
-            System.out.print("Please select column: ");
-            column = scanner.nextInt();
-
-            p2.placeSymbol(board, row, column);
-
-            System.out.printf("You placed %s on (%d,%d)\n","O",row,column);
-            board.print();
-            if (check(board, row, column)) {
-                System.out.printf("%s player win!\n",p2.getName());
-                break;
-            }
-
         }
 
     }

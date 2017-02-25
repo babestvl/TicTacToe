@@ -16,11 +16,12 @@ public class Square {
         return this.s;
     }
 
+    @Override
     public String toString(){
         if(s != null){
             return s.toString();
         } else {
-            return " ";
+            return "_";
         }
     }
 }
