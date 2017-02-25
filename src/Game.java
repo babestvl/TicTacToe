@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Game {
     private Scanner scanner = new Scanner(System.in);
     private boolean check(Board board, int row, int column) {
+        //column check
         for (int i = 0; i < row; i++) {
             String s = "";
             for (int j = 0; j < column; j++) {
@@ -12,6 +13,7 @@ public class Game {
                 return true;
             }
         }
+        //row check
         for (int i = 0; i < column; i++) {
             String s = "";
             for (int j = 0; j < row; j++) {
@@ -21,10 +23,13 @@ public class Game {
                 return true;
             }
         }
+        //cross check
         for (int i = 0; i < row; i++) {
             String s = "";
             for (int j = 0; j < row; i++) {
+                for (int k = 0; k < column; k++) {
 
+                }
             }
         }
         return false;
