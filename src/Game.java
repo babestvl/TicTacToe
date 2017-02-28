@@ -2,36 +2,49 @@ import java.util.Scanner;
 
 public class Game {
     private Scanner scanner = new Scanner(System.in);
-    private boolean check(Board board, int row, int column) {
-        //column check
-        for (int i = 0; i < row; i++) {
-            String s = "";
-            for (int j = 0; j < column; j++) {
-                s+=board.getSquares()[i][j];
-            }
-            if (s.contains("XXXXX")||s.contains("OOOOO")) {
-                return true;
+    private boolean check(Board board, int putX, int putY) {
+        String s = "";
+        for (int i = -5; i < 5; i++) {
+            if (putY + i >= 0 && putY + i < 9) {
+                s += board.getSquares()[putX][putY + i];
             }
         }
-        //row check
-        for (int i = 0; i < column; i++) {
-            String s = "";
-            for (int j = 0; j < row; j++) {
-                s += board.getSquares()[j][i];
-            }
-            if (s.contains("XXXXX")||s.contains("OOOOO")) {
-                return true;
-            }
+        if(s.contains("XXXXX")||s.contains("OOOOO")){
+            return true;
         }
-        //cross check
-        for (int i = 0; i < row; i++) {
-            String s = "";
-            for (int j = 0; j < row; i++) {
-                for (int k = 0; k < column; k++) {
 
-                }
+        s = "";
+        for (int i = -5; i < 5; i++) {
+            if (putX + i >= 0 && putX + i < 9) {
+                s += board.getSquares()[putX + i][putY];
             }
         }
+        if(s.contains("XXXXX")||s.contains("OOOOO")){
+            return true;
+        }
+
+        s = "";
+        for (int i = -5; i < 5; i++) {
+            if (putX + i >= 0 && putX + i < 9 && putY + i >= 0 && putY + i < 9) {
+                s += board.getSquares()[putX + i][putY + i];
+            }
+        }
+        System.out.println(s);
+        if(s.contains("XXXXX")||s.contains("OOOOO")){
+            return true;
+        }
+
+        s = "";
+        for (int i = -5; i < 5; i++) {
+            if (putX - i >= 0 && putX - i < 9 && putY + i >= 0 && putY + i < 9) {
+                s += board.getSquares()[putX - i][putY + i];
+            }
+        }
+        System.out.println(s);
+        if(s.contains("XXXXX")||s.contains("OOOOO")){
+            return true;
+        }
+
         return false;
     }
 
@@ -48,13 +61,13 @@ public class Game {
         for (int i = 0; true; i++){
             System.out.println(p[i%2].getName()+"'s turn.");
             System.out.print("Please select row: ");
-            row = scanner.nextInt();
+            int putX = scanner.nextInt();
             System.out.print("Please select column: ");
-            column = scanner.nextInt();
-            p[i%2].placeSymbol(board, row, column);
+            int putY = scanner.nextInt();
+            p[i%2].placeSymbol(board, putX, putY);
             System.out.printf("You placed %s on (%d,%d)\n",p[i%2].getSymValue(), row, column);
             board.print();
-            if (check(board, row, column)) {
+            if (check(board, putX - 1, putY - 1)) {
                 System.out.printf("%s player win!\n",p[i%2].getName());
                 break;
             }
