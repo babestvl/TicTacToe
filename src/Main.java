@@ -21,7 +21,7 @@ public class Main {
                 System.out.printf("%s player win!\n", g.getP()[i%2].getName());
                 break;
             }
-
+            System.out.println();
         }
     }
 
