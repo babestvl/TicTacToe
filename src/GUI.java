@@ -1,9 +1,10 @@
-import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
 
@@ -34,7 +35,21 @@ public class GUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		
+		Container infoField = new Container();
+		infoField.setLocation(0, 0);
+		infoField.setSize(300, 60);
+		infoField.setLayout(null);
+			JLabel currentPlayer = new JLabel("Player :");
+			currentPlayer.setBounds(6, 6, 187, 48);
+			Button button = new Button("Reset");
+			button.setBounds(199, 15, 100, 29);
+		infoField.add(currentPlayer);
+		infoField.add(button);
 
+		
+		
+		contentPane.add(infoField);
+		
 		setContentPane(contentPane);
 	}
 
