@@ -7,7 +7,7 @@ public class Player {
     }
 
     public Boolean placeSymbol(Board board, int row, int column) {
-        return board.placeSymbol(new Symbol(symValue), row-1, column-1);
+        return board.placeSymbol(new Symbol(symValue), row, column);
     }
 
     public String getName() {

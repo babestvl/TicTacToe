@@ -1,39 +1,19 @@
 import java.awt.Button;
 import java.awt.Container;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GUI extends JFrame {
+public class GUI extends JFrame{
 
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public GUI() {
+	public GUI(Game g) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300, 372);
 		contentPane = new JPanel();
@@ -43,10 +23,10 @@ public class GUI extends JFrame {
 		infoField.setLocation(0, 0);
 		infoField.setSize(300, 60);
 		infoField.setLayout(null);
-			JLabel currentPlayer = new JLabel("Player :");
-			currentPlayer.setBounds(6, 6, 187, 48);
-			Button button = new Button("Reset");
-			button.setBounds(199, 15, 100, 29);
+        JLabel currentPlayer = new JLabel("Player :");
+        currentPlayer.setBounds(6, 6, 187, 48);
+        Button button = new Button("Reset");
+        button.setBounds(199, 15, 100, 29);
 		infoField.add(currentPlayer);
 		infoField.add(button);
 
@@ -58,12 +38,8 @@ public class GUI extends JFrame {
 			for(int j = 0 ; j < 9 ; j++){
 				final int x = i;
 				final int y = j;
-				JButton square = new JButton(" ");
-				square.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						markField(x, y);
-					}
-				});
+				final JButton square = new JButton(" ");
+				square.addActionListener(e -> markField(square, g, x, y));
 				boardField.add(square);
 			}
 		}
@@ -73,8 +49,12 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 	}
 	
-	private void markField(int x, int y){
-		System.out.println("X: "+x+" Y: "+y);
-	}
+	private void markField(JButton s, Game g, int x, int y) {
+	    Player p = g.getPlayer();
+        p.placeSymbol(g.getBoard(),x,y);
+        s.setText(p.getSymValue() + "");
+        if (g.check(x, y)) {
 
+        }
+    }
 }

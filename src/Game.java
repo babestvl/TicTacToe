@@ -1,9 +1,10 @@
 public class Game {
     private Player[] p;
     private Board board;
-
+    private int round;
     public Game(int row, int column, String name1, String name2) {
         board = new Board(row, column);
+        round = 0;
         p = new Player[2];
         p[0] = new Player(name1, "X");
         p[1] = new Player(name2, "O");
@@ -11,7 +12,6 @@ public class Game {
 
     public boolean check(int putX, int putY) {
         String s = "";
-        board.print();
         for (int i = -5; i < 5; i++) {
             if (putY + i >= 0 && putY + i < 9) {
                 s += board.getSquares()[putX][putY + i];
@@ -57,9 +57,8 @@ public class Game {
         return board;
     }
 
-    public Player[] getP() {
-        return p;
+    public Player getPlayer() {
+        return p[round++ % 2];
     }
-
 }
 
