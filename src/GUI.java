@@ -1,4 +1,6 @@
 import java.awt.Button;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -9,7 +11,9 @@ import javax.swing.JPanel;
 public class GUI extends JFrame{
 
 	private JPanel contentPane;
-
+	private Container boardField;
+	private Container infoField;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -19,7 +23,7 @@ public class GUI extends JFrame{
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		
-		Container infoField = new Container();
+		infoField = new Container();
 		infoField.setLocation(0, 0);
 		infoField.setSize(450, 60);
 		infoField.setLayout(null);
@@ -30,7 +34,7 @@ public class GUI extends JFrame{
 		infoField.add(currentPlayer);
 		infoField.add(button);
 
-		Container boardField = new Container();
+		boardField = new Container();
 		boardField.setLocation(2, 60);
 		boardField.setLayout(new GridLayout(9,9));
 		boardField.setSize(450, 450);
@@ -53,8 +57,12 @@ public class GUI extends JFrame{
 	    Player p = g.getPlayer();
         p.placeSymbol(g.getBoard(),x,y);
         s.setText(p.getSymValue() + "");
+        s.setEnabled(false);
         if (g.check(x, y)) {
-            System.exit(0);
+        	Component[] arr = boardField.getComponents();
+        	for(Component a : arr){
+        		a.setEnabled(false);
+        	}
         }
     }
 }
