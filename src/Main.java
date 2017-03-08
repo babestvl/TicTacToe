@@ -17,6 +17,7 @@ public class Main {
             int putY = scanner.nextInt();
             System.out.printf("You placed %s on (%d,%d)\n", g.getP()[i%2].getSymValue(), putX, putY);
             g.getP()[i%2].placeSymbol(g.getBoard(), putX, putY);
+            g.getBoard().print();
             if (g.check(putX - 1, putY - 1)) {
                 System.out.printf("%s player win!\n", g.getP()[i%2].getName());
                 break;

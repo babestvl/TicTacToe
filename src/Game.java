@@ -11,7 +11,6 @@ public class Game {
 
     public boolean check(int putX, int putY) {
         String s = "";
-        board.print();
         for (int i = -5; i < 5; i++) {
             if (putY + i >= 0 && putY + i < 9) {
                 s += board.getSquares()[putX][putY + i];
