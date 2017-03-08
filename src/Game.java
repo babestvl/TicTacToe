@@ -60,5 +60,9 @@ public class Game {
     public Player getPlayer() {
         return p[round++ % 2];
     }
+    public void resetGame() {
+        board = new Board(9, 9);
+        round = 0;
+    }
 }
 
